@@ -1,0 +1,151 @@
+---
+title: "TidyTuesday w29 - Technology Adoptation"
+date: "7-Aug-2022
+author: "Johnny Lau"
+output: html_document
+---
+
+Focus: To show the changes in the sources of energy production over time in Western Europe
+
+```{r}
+#install.packages("geomtextpath")
+
+# Load libraries required
+library(countrycode)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(MetBrewer)
+library(geomtextpath)
+library(patchwork)
+
+knitr::opts_chunk$set(warning=F)
+
+sysfonts::font_add_google(name = "Anton", "Anton")
+sysfonts::font_add_google(name = "Roboto", "Roboto")
+
+
+showtext::showtext_auto()
+
+```
+
+
+# Loading & cleaning data
+
+```{r}
+
+technology <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-07-19/technology.csv') 
+
+west_eur <- c('Austria', 'Belgium', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany', 'Ireland', 'Latvia', 'Lithuania', 'Luxembourg', 'Netherlands', 'Norway', 'Portugal', 'Spain', 'Sweden', 'United Kingdom')
+
+## focusing mainly on 'energy' data
+## focusing only on west europe
+## focusing on 1950 onwards
+energy_df <- technology %>%
+  filter(category == "Energy",
+          year >= 2000 ) %>%
+  ## get country names by iso3c
+  mutate(country = countrycode::countrycode(iso3c, origin = "iso3c", destination = 'country.name')) %>%
+  filter( country %in% west_eur) %>%
+  filter( str_detect(label, "Electricity from") ) %>%
+  mutate( variable = case_when( variable == "elec_coal" ~ "coal",
+                                variable == "elec_gas" ~ "gas",
+                                variable == "elec_oil" ~ "oil",
+                                variable == "elec_nuc" ~ "nuclear",
+                                variable == "elec_hydro" ~ "hydro",
+                                variable == "elec_solar" ~ "solar",
+                                variable == "elec_wind" ~ "wind",
+                                variable == "elec_renew_other" ~ "other renewables")) %>%
+  mutate( variable = factor(variable, levels=c("coal", "oil", "gas", "nuclear", "hydro", "solar", "wind", "other renewables") ) )
+
+
+## group_by country, year, sourceType
+energy_grouped_df <- energy_df %>%
+  mutate( sourceType = 
+            case_when( variable %in% c("coal", "oil", "gas") ~ "all fossil",
+                       variable == "nuclear" ~ "nuclear",
+                       TRUE ~ "all renewables"
+                                  ) ) %>%
+  group_by(country, year, sourceType) %>%
+  mutate(acc_values = sum(value)) %>%
+  distinct(country, year, sourceType, .keep_all = T) %>%
+  select(country, year, sourceType, acc_values) %>%
+  ungroup() %>%
+  group_by(country, year) %>%
+  mutate( prop = acc_values/sum(acc_values))
+
+
+```
+
+# Plots
+```{r}
+#theme_set(theme_minimal())  
+
+theme_update(
+  plot.background = element_rect(fill = "#C0C0C0", color = NA)
+  )
+
+## Left plot: Europe overall
+line_colors <- c( rep("#440154FF", 3), "#ffff00", rep("#228B22",4))
+  
+plot_EurOverall <- energy_df %>%
+  group_by(year, variable) %>%
+  summarise( sum = sum(value) ) %>%
+  ggplot( aes(x=year, y= sum)) +
+  geom_textline(aes(group = variable, label = variable, color = variable), size = 5, vjust = 0.25, linewidth = 1, hjust = 0.7) + 
+  labs( y = "Energy production (TWH)", x= "") +
+  scale_color_manual(values = line_colors) +
+  theme_minimal() +
+  theme(
+    strip.text = element_text(size = 14),
+    legend.position = "none",
+    axis.title.y = element_text( colour = "black", angle = 90, margin = margin(0,0.75,0,0, "cm")),
+    axis.text = element_text( colour = "black")
+  ) 
+
+
+## Right plot: by Country
+plot_byCountry <- energy_grouped_df %>%
+  ggplot(aes(x = year, y = prop, fill = sourceType)) + 
+  geom_area() + 
+  facet_wrap(~country, nrow = 5) +
+  scale_fill_viridis_d() +
+  scale_x_continuous(breaks = c(2000, 2010, 2020)) +
+  
+  theme_void() +    
+  labs( y = "proportion", x ="") +
+    theme(#text = element_text(family = "Roboto"),
+        strip.text.x = element_text(size=10),
+        legend.position = c(0.6, 0.06),
+        legend.title = element_text(size = 15),
+        legend.text = element_text(size=13),
+        plot.margin = margin(0.75, 1,1,1, "cm")) +
+  guides(fill=guide_legend(title = "Energy Source")) +
+  theme(panel.spacing.x=unit(0.5, "cm")) +
+  theme(axis.text = element_text( size = 8),
+        axis.ticks = element_line(),
+        axis.title.y = element_text( colour = "black", angle = 90, margin = margin(0,0.75,0,0, "cm") )
+        ) 
+
+
+
+# Combined plot
+finalPlot <- plot_EurOverall + plot_byCountry + 
+  plot_annotation(
+    title = "Sources of energy generation in Western European countries",
+    subtitle = "From year 2000 onwards",
+    caption = "Source: data.nber.org & UN; Plots created by Johnny KL",
+    theme = theme(plot.title = element_text(size = 18, family = "Anton"),
+        plot.subtitle = element_text(size = 14),
+        plot.caption = element_text( size = 12),
+        plot.margin = margin(1, 0.7,1,1, "cm")
+        )
+    )
+
+ 
+
+## To use, uncomment
+# ggsave("plots/energyProd_westEurope_2000To2020.png", plot = finalPlot, width = 15, height = 9)
+
+```

@@ -1,0 +1,188 @@
+---
+title: "Wk36 Lego dataset"
+output: html_notebook
+---
+
+# 2022-09-06
+# TidyTuesday week 36 LEGO database, rebrickable, courtesy of Georgios Karamanis.
+
+```{r}
+# Load libraries
+library(tidyverse)
+library(ggtext)
+library(ggimage)
+library(showtext)
+library(cowplot)
+library(gganimate)
+
+# Import fonts
+#font_add_google("DM Sans")
+#f1 = "DM Sans"
+#font_add_google("Sora")
+#f2 = "Sora"
+#font_add_google("Inter")
+#f3 = "Inter"
+
+font_add_google("Tourney", family="Tourney")
+f4="Tourney"
+
+font_add_google("Special Elite", family = "special")
+
+
+showtext_opts(dpi = 300)
+showtext_auto(enable = TRUE)
+
+#knitr::opts_chunk$set(fig.width=12, fig.height=12)
+
+```
+
+
+# Read in data
+
+```{r}
+
+inventories <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-06/inventories.csv.gz')
+inventory_sets <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-06/inventory_sets.csv.gz')
+sets <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-06/sets.csv.gz')
+inventory_parts = readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-06/inventory_parts.csv.gz")
+colors = readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-06/colors.csv.gz")
+
+themes = readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-06/themes.csv.gz")
+
+
+
+
+```
+
+# Merge data
+
+```{r}
+
+df= inventories %>% left_join(inventory_parts, by=c("id"="inventory_id")) %>%
+  left_join(colors %>% rename(color_name = name), by=c("color_id"="id")) %>%
+  filter(is_spare==FALSE) %>%
+  left_join(sets %>% select(-img_url)  # -num_parts
+            , by="set_num") %>%
+  left_join(themes %>% select(-parent_id) %>% rename(theme_name=name), by = c("theme_id" = "id")) %>%
+  filter(is_trans==FALSE, color_id!=9999,between(year, 2002,2021))
+
+
+
+```
+
+# Section 1: Waffle plot
+#inspired by Abdoul Madjid @issa_madjid https://twitter.com/issa_madjid/status/1526685250994286592/photo/1
+## Most common soild colors from 2002 to 2021
+
+```{r}
+
+top10_perYear_df <- df %>% 
+  group_by(year,color_name, color_id, rgb, is_trans) %>%
+  summarise( ntotal = sum(quantity)) %>%
+  ungroup() %>%
+  group_by(year) %>%
+  slice_max(order_by = ntotal, n=10) %>%
+  ungroup() %>%
+  mutate(rgb = paste0("#", tolower(rgb))) 
+
+
+
+#s1= df %>% 
+#  group_by(year,color_name, color_id, rgb, is_trans) %>%
+#  tally(quantity) %>%
+#  ungroup() %>%
+#  group_by( color_name) %>%
+#  summarise(n_year=n_distinct(year)) %>%
+#  filter(n_year==20) 
+#  
+#s2= df %>% filter(color_name %in% s1$color_name) %>%
+#  group_by( color_name ) %>%
+#  tally(quantity, sort=TRUE) %>%
+#  filter(n>100000) #7 colors with more than 100000 bricks
+  
+
+```
+
+
+```{r}
+### Grid df
+#d1= df %>% 
+#  group_by(year, color_id, color_name, rgb, is_trans) %>%
+#  tally(quantity) %>%
+#  mutate(grp=case_when(!color_name %in% s2$color_name~"Other", #TRUE~paste(color_name))) %>%
+#  ungroup() %>%
+#  group_by(year,grp) %>%
+#  tally(n) %>%
+#  mutate(prop=round(n/sum(n)*100)) %>%
+#  select(-n) %>%
+#  pivot_wider(names_from = grp, values_from =prop) %>%
+#  select(-Other) %>%
+#  mutate(Other=100-Black-Blue-`Light Bluish Gray`-Red-Tan-White-Yellow) #%>%
+#  ungroup() %>%
+#  pivot_longer(!year) 
+#
+#d2= d1 %>% uncount(value) %>%
+#  mutate(name=factor(name, levels=s2$color_name)) %>%
+#  group_by(year) %>%
+#  arrange(name, .by_group = TRUE) %>%
+#  mutate(x=rep(1:10,10),
+#         id=row_number(),
+#         y=cut(id, breaks = seq(0,100,10), label=seq(1,10,1))) %>%
+#  select(-id) %>%
+#  ungroup() %>%
+#  mutate(image=case_when(name=="Black"~"images/black.png",
+#                       name=="Blue"~"images/blue.png",
+#                       name=="Tan"~"images/tan.png",
+#                       name=="Red"~"images/red.png",
+#                       name=="White"~"images/white.png",
+#                       name=="Yellow"~"images/yellow.png",
+#                       name=="Light Bluish Gray"~"images/grey.png",
+#                       T ~ "images/clear.png"
+#                       ))
+#
+
+```
+## Plot
+
+###Treemap plot
+```{r}
+library(treemapify)
+
+sample1 <- top10_perYear_df %>% filter(year==2002) #%>%   #d1
+  #left_join(colors %>% select(name, rgb), by="name") %>%
+  #mutate(rgb = paste0("#", tolower(rgb))) 
+  #%>%
+  #filter(name != "Other")
+
+
+treemap <- ggplot(top10_perYear_df, aes(area=ntotal, fill=rgb),color=rgb ) +
+  geom_treemap() +
+  #Use values without scaling
+  scale_fill_identity() +
+  geom_treemap_text(aes(label = paste(color_name, "\n\n", scales::comma(ntotal))),
+                     color = "gray80",
+                     place = "centre",
+                    #padding.y=unit(1.1, "cm"),
+                    ) +
+  labs(title = "*The Colourful World of <span style='color:red;'>L</span><span style='color:green;'>E</span><span style='color:yellow;'>G</span><span style='color:blue;'>O</span>*", 
+       subtitle = "10 most common colours of Lego sets") +
+  theme(legend.position = "none",
+        plot.title = element_markdown(family = "Tourney",
+                            face="bold", size=20),
+        plot.subtitle = element_markdown(family = "special", 
+                                         margin = margin(b=20, unit="pt") ),
+        plot.background = element_rect(fill="#D3D3D3"),
+        plot.margin = margin(20,20,20,20, "pt")
+        ) 
+
+treemap_animate <- treemap + gganimate::transition_states(year, 
+                                     transition_length=3)
+
+
+anim_save("treemap_transition.gif", animation = treemap_animate) #path
+
+
+```
+
+
+
