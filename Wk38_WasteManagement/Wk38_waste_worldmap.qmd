@@ -1,0 +1,101 @@
+---
+title: "wk38_waste_worldmap"
+author: "Johnny Lau"
+date: "2022-09-20"
+format: html
+editor: visual
+---
+
+Inspiration from @leeolney3
+
+Global enviro
+
+```{r}
+
+# Load packages ----
+
+library(showtext)
+library(tidyverse)
+library(ggtext)
+
+# Import fonts ----
+
+font_add_google(name = "Roboto", family = "title")
+font_add_google(name = "Raleway", family = "subtitle")
+showtext_auto()
+
+```
+
+Data import
+
+```{r}
+# Import dataset ----
+
+WWTP <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-20/HydroWASTE_v10.csv")
+
+```
+
+Data preprocessing
+
+```{r}
+
+WWTP_df <- WWTP %>%
+  filter(!STATUS %in% c("Closed", "Decommissioned" , "Non-Operational"))
+
+WWTP_byCountry <- WWTP_df %>%
+  group_by(COUNTRY) %>%
+  summarise(TOT_WASTE_DIS = sum(WASTE_DIS) ) %>%
+  mutate( rank = ifelse(rank(-TOT_WASTE_DIS) <=20, rank(-TOT_WASTE_DIS), NA ))%>%
+  ungroup() %>%
+  mutate( COUNTRY = case_when( grepl("United States", COUNTRY) ~ "USA",
+                               grepl("United Kingdom", COUNTRY) ~ "UK",
+                                     T~ COUNTRY)) 
+ 
+WWTP_10000wasteDis <- WWTP %>%
+  filter(WASTE_DIS >=10000 )
+# WWTP_byCountry$COUNTRY[WWTP_byCountry$rank <= 20 & !is.na(WWTP_byCountry$rank)] %in% world$region
+
+```
+
+Plot
+
+```{r fig.width = 12, fig.height = 6}
+
+# Create plot ----
+world <- map_data("world") %>% 
+  filter(region != "Antarctica") %>%
+  left_join(WWTP_byCountry %>% filter(rank <=10), by = c("region" = "COUNTRY") ) %>%
+  mutate( color = if_else( !is.na(rank), "#671e00", "#232139" ))  
+
+worldmap_plot <- ggplot() +
+  geom_polygon(data = world,
+               aes(x = long, y = lat, group = group, 
+                   fill = color, colour = color)
+               ) +
+  scale_fill_identity() +
+  scale_color_identity() +
+  coord_fixed(1.3) +
+  geom_point(data = WWTP_10000wasteDis,
+             aes(x = LON_WWTP, y = LAT_WWTP),
+             colour = "#fafdd4", alpha = 0.15, size = 0.2)  +  #"#cccdc5"
+  theme_void() +
+  theme(panel.background = element_rect(fill = "#bbc7c9", colour = "#bbc7c9"),  #"#01000e"
+        plot.background = element_rect(fill = "#bbc7c9" , colour = "#bbc7c9"),
+        plot.title = element_markdown(family = "title", colour = "#232139",
+                                  size = 50, face="plain", lineheight=1.2, margin = margin(t = 15, l=15)), 
+        plot.subtitle = element_markdown(family = "subtitle", colour = "#232139",
+                                     size = 35, face="plain", lineheight=1.2, margin = margin(b = 15, l=15)),
+        plot.caption = element_text(colour = "#232139", size = 25, hjust = 1, 
+                                    lineheight = 0.5, margin = margin(b = 20))
+  ) +
+  labs(title = "World's <span style='color:#671e00'><b>Top 10 Countries</b></span>with the most daily wastewater discharge",
+       subtitle = "More than 8,000 recorded <span style='color:#fafdd4'>wastewater plants</span> making at least 10,000 m^3 of waste discharge daily",
+       caption = "Graphic: Johnny L \nData source: Marcedo et al, 2022 | #TidyTuesday2022 week38") 
+
+```
+
+```{r}
+# Save plot ----
+ggsave("20220921_wastewater_worldmap.png", worldmap_plot, dpi = 320, width = 12, height = 6)
+
+```
