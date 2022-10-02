@@ -88,7 +88,7 @@ worldmap_plot <- ggplot() +
         plot.caption = element_text(colour = "#232139", size = 25, hjust = 1, 
                                     lineheight = 0.5, margin = margin(b = 20))
   ) +
-  labs(title = "World's <span style='color:#671e00'><b>Top 10 Countries</b></span>with the most daily wastewater discharge",
+  labs(title = "World's <span style='color:#671e00'><b>Top 10 Countries</b></span> with the most daily wastewater discharge",
        subtitle = "More than 8,000 recorded <span style='color:#fafdd4'>wastewater plants</span> making at least 10,000 m^3 of waste discharge daily",
        caption = "Graphic: Johnny L \nData source: Marcedo et al, 2022 | #TidyTuesday2022 week38") 
 
@@ -96,6 +96,6 @@ worldmap_plot <- ggplot() +
 
 ```{r}
 # Save plot ----
-ggsave("20220921_wastewater_worldmap.png", worldmap_plot, dpi = 320, width = 12, height = 6)
+ggsave("20220920_WasteManagement.png", worldmap_plot, dpi = 320, width = 12, height = 6)
 
 ```

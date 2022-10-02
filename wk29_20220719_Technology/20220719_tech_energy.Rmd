@@ -146,6 +146,6 @@ finalPlot <- plot_EurOverall + plot_byCountry +
  
 
 ## To use, uncomment
-# ggsave("plots/energyProd_westEurope_2000To2020.png", plot = finalPlot, width = 15, height = 9)
+# ggsave("20220719_tech_energy_WEUR.png", plot = finalPlot, width = 15, height = 9)
 
 ```
