@@ -50,9 +50,9 @@ cats_prey_age_outdoors_plot <- cats_uk_reference %>%
          axis.text=element_blank(),
          legend.position = 'none',
          plot.background=element_rect(fill = "black", colour="black"),
-         plot.title = element_text(hjust = 0.1 , vjust= -0.5, family = "RobCon", size=25, colour="#ff5349"), 
-         axis.title.y = element_text(hjust=1, family = "RobCon", size=24, colour="white"), 
-         axis.title.x = element_text(hjust=1, family = "RobCon", size=24, colour="white"), 
+         plot.title = element_text(hjust = 0.1 , vjust= -0.5, family = "RobCon", size=28, colour="#ff5349"), 
+         axis.title.y = element_text(hjust=1, family = "RobCon", size=26, colour="white"), 
+         axis.title.x = element_text(hjust=1, family = "RobCon", size=26, colour="white"), 
          axis.line.y = element_line(arrow = grid::arrow(length = unit(0.15, "cm")), colour="white" ),
          axis.line.x = element_line(arrow = grid::arrow(length = unit(0.15, "cm")), colour="white" ),
          plot.margin = unit(c(t=0, r=0.75, b=0.5, l=0), "cm") )
@@ -75,7 +75,7 @@ cats_prey_age_outdoors_plot <- cats_prey_age_outdoors_plot +
            yend = Jago_pers_data$prey_p_month[1], 
            linewidth = 0.5, colour = "#ff5349",
            curvature = 0.5,
-           arrow = arrow(length = unit(1.2, "mm"), type = "closed")) +
+           arrow = arrow(length = unit(1, "mm"), type = "closed")) +
   geom_textbox(data = Jago_pers_data,
                mapping = aes(x = age_years-2, y = prey_p_month-5.5,
                              label = toupper(animal_id) ),
@@ -94,7 +94,7 @@ cats_prey_age_outdoors_plot <- cats_prey_age_outdoors_plot +
            yend = Sid_pers_data$prey_p_month[1], 
            linewidth = 0.5, colour = "#ff5349",
            curvature = 0.5,
-           arrow = arrow(length = unit(1.2, "mm"), type = "closed")) +
+           arrow = arrow(length = unit(1, "mm"), type = "closed")) +
   geom_textbox(data = Sid_pers_data,
                mapping = aes(x = age_years+2, y = prey_p_month-4,
                              label = toupper(animal_id) ),
@@ -128,7 +128,7 @@ cats_prey_age_indoors_plot <- cats_uk_reference %>%
          axis.text=element_blank(),
          legend.position = 'none',         
          plot.background=element_rect(fill = "black", colour="#808080", linetype="dotted", size=1 ),
-         plot.title = element_text(hjust = 0.1, vjust= -0.5, family = "RobCon", size=25, colour="#808080"),
+         plot.title = element_text(hjust = 0.1, vjust= -0.5, family = "RobCon", size=28, colour="#808080"),
          plot.margin = unit(c(t=0, r=0.75, b=0, l=0), "cm"))
 
 
@@ -190,42 +190,42 @@ cat_motion_map_plot <- function(df, pet_tag){
 ## Two examples of where the cats were about: geolocation density
 Jago_motion_plot <- cat_motion_map_plot(cats_uk_mvmt, "Jago") + 
   labs(title = glue("(Example 1) <span style='color:#ff5349'>JAGO</span> 's movements in neighbourhood") ) +
-  theme(plot.title = element_markdown(hjust = 0.5, family = "RobCon", size=25, colour="white"))
+  theme(plot.title = element_markdown(hjust = 0.5, family = "RobCon", size=28, colour="white"))
 
 Sid_motion_plot <- cat_motion_map_plot(cats_uk_mvmt, "Sid-Tag") +
   labs(title = glue("(Example 2) <span style='color:#ff5349'>SID</span> 's movements in neighbourhood")) +
-  theme(plot.title = element_markdown(hjust = 0.5, family = "RobCon", size=25, colour="white"))
+  theme(plot.title = element_markdown(hjust = 0.5, family = "RobCon", size=28, colour="white"))
 
 
 
 ## Combined plot (all in one) ---
 ### subtitle content
-subtitle <- glue("Do you know what your pet has been doing?<br><br><span style='color:#41a7f5'>Movebank for Animal Tracking Data</span>
-           includes GPS coordinates, behavioural activities and physical characteristics for pet cats in the UK.
-           <br>Not so surprisingly, the <span style='color:#ff5349'>more outdoor cats</span> show greater variability in the amount of prey they caught each month (especially where they were younger), 
-           <br> compared with the <span style='color:#808080'>more indoor cats</span>.")
+subtitle <- glue("Do you know what your pet has been doing?<br><br><span style='color:#41a7f5'>Movebank for Animal Tracking Data</span> 
+            includes GPS coordinates, behavioural and physical characteristics for pet cats in the UK. 
+            <br>Not so surprisingly, the <span style='color:#ff5349'>more outdoor cats</span> show greater variability in the amount of prey they caught each month (especially 
+            <br>when they were younger), compared with the <span style='color:#808080'>more indoor cats</span>.")
 
 ### Putting all plots together
 cats_fin_plot <- cats_prey_age_outdoors_plot + Jago_motion_plot + cats_prey_age_indoors_plot + Sid_motion_plot +
   plot_layout(nrow = 2, ncol = 2, widths = c(0.9, 1 , 0.9, 1), heights = rep(1, 4)) +
   plot_annotation(  title = "Oh kitty, where paw-sibly could you have been?",
                     subtitle = subtitle,
-                    caption = "Graphic by Johnny K Lau | Data : Kays et al. & {Movebank} data",
+                    caption = "Graphic: Johnny K Lau | Data : movebank.org | #TidyTuesday",
                     theme = theme(plot.background = element_rect( fill = "black", colour="black"),
-                                  plot.margin = unit(c(t=1, r=0.5, b=0.5, l=1.25), "cm"),
-                                  plot.title = element_text(hjust = 0.5, colour="white", family = "Itim", size=60),
+                                  plot.margin = unit(c(t=1, r=0.5, b=0.75, l=1.25), "cm"),
+                                  plot.title = element_text(hjust = 0.5, colour="#41a7f5", family = "Itim", size=65),
                                   plot.subtitle = element_markdown( family = "RobCon", color = "white",
-                                                                     size = 26, hjust = 0, lineheight = 0.3,
-                                                                     margin = margin(l = 25, b = 20, t=20)),
+                                                                     size = 30, hjust = 0, lineheight = 0.3,
+                                                                     margin = margin(l = 15, b = 40, t=20)),
                                   plot.caption = element_text(family = "RobCon",
-                                                              color = "white", size = 23, hjust = 0.95,
-                                                              margin = margin(t=25))) 
+                                                              color = "white", size = 26, hjust = 0.5,
+                                                              margin = margin(t=40))) 
                       )
 
 
 
 # Save plot ----
-ggsave("2023/20230130wk5/tt20230130wk5_cats.png", cats_fin_plot, dpi = 300, width = 9, height = 6, bg="black")
+ ggsave("2023/20230130wk5/tt20230130wk5_cats.png", cats_fin_plot, dpi = 300, width = 8.5, height = 8, bg="black")
 
 
 
