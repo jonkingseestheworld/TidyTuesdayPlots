@@ -72,7 +72,7 @@ stockprice_plot <- ggplot(data= df_joined) +
   
   labs( title = "Big Tech Stock Prices",
         subtitle = "Stock price fluctuation of 14 big tech companies between 2010 and 2022 
-        <br>Close price shown only on business days",
+        <br>Price at market close, showing only business days",
         caption = "Graphic: Johnny K Lau | Data: Yahoo Finance "
         ) +
   theme(text = element_text(family = "inter", lineheight = 0.4, color = "black"),
