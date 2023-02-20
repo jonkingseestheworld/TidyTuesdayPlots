@@ -11,4 +11,4 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 ## Gallery of Examples
 
 ### **[Age Gap in Hollywood Movies](2023/20230214wk7)**
-![Screenshot](2023/20230214wk7/ tt20230214wk7_hollywoodAge.png)
+![Screenshot](2023/20230214wk7/tt20230214wk7_hollywoodAge.png)
