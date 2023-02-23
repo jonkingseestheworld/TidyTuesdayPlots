@@ -20,7 +20,7 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 ![Screenshot](2023/20230207wk6/tt20230207wk6_techrank.png)
 
 ### **[Wastewater Management Plants in the World](2022/wk38_20220920_waste)**
-![Screenshot](2022/wk38_20220920_waste/20220920_WasteManagement.png)
+![Screenshot](2022/wk38_20220920_waste/20220920_WasteManagement1.png)
 
 
 ### **[Energy Generation in Western European Countries](2022/wk29_20220719_Technology)**
