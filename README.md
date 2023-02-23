@@ -10,6 +10,10 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 
 ## Gallery of Examples
 
+### **["The Joy of Painting": Colours used in Bob Ross' paintings](2023/20230221wk8/)**
+![Screenshot](2023/20230221wk8/tt20230221wk8_BRcolor_anim.gif)
+![Screenshot](2023/20230221wk8/tt20230221wk8_BRcolor_uniq.png)
+
 ### **[Age Gap in Hollywood Movies](2023/20230214wk7)**
 ![Screenshot](2023/20230214wk7/tt20230214wk7_hollywoodAge.png)
 
