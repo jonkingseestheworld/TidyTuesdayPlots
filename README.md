@@ -11,16 +11,20 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 ## Gallery of Examples
 
 ### **["The Joy of Painting": Colours used in Bob Ross' paintings](2023/20230221wk8/)**
+Different colours used over the seasons of the show in animation
 ![Screenshot](2023/20230221wk8/tt20230221wk8_BRcolor_anim.gif)
+
+All unique colours used across all 31 seasons of the show
 ![Screenshot](2023/20230221wk8/tt20230221wk8_BRcolor_uniq.png)
 
 ### **[Age Gap in Hollywood Movies](2023/20230214wk7)**
 ![Screenshot](2023/20230214wk7/tt20230214wk7_hollywoodAge.png)
 
-### **[Big Tech Stock Prices](2023/20230207wk6)**
+### **[Big Tech Stock](2023/20230207wk6)**
+Fluctuation in stock prices over years
 ![Screenshot](2023/20230207wk6/tt20230207wk6_techstockprice.png)
 
-**Big Tech Ranking by Stock Price**
+Ranking by Stock Price over years
 ![Screenshot](2023/20230207wk6/tt20230207wk6_techrank.png)
 
 ### **[Wastewater Management Plants in the World](2022/wk38_20220920_waste)**
