@@ -1,10 +1,10 @@
 # TidyTuesday 2022
 
 ## :spiral_notepad:	&nbsp; Summary 
-| Week               | Topic                | Graphic / Visual                                | Source   |
-|:------------------:|----------------------|-------------------------------------------------|-----------------|
-| [6](20230207wk6)   | Big Tech Stock       | Multiple line plots of time series data         | Yahoo Finance   |
-| [7](20230214wk7)   | Hollywood Age Gap    | Interactive {reactable} along with html tweaks  | Data is Plural |
+| Week               | Topic                | Graphic / Visual                                | Source                  |
+|:------------------:|----------------------|-------------------------------------------------|-------------------------|
+| [6](20230207wk6)   | Big Tech Stock       | Multiple line plots of time series data         | Yahoo Finance           |
+| [7](20230214wk7)   | Hollywood Age Gap    | Interactive {reactable} along with html tweaks  | Data is Plural          |
 | [8](20230221wk8)   | Bob Ross Colours     | Treemap - static and in animation.              | {BobRossColors} package |
 
 
