@@ -6,7 +6,7 @@
 | [6](20230207wk6)   | Big Tech Stock       | Multiple line plots of time series data         | Yahoo Finance              |
 | [7](20230214wk7)   | Hollywood Age Gap    | Interactive {reactable} along with html tweaks  | Data is Plural             |
 | [8](20230221wk8)   | Bob Ross Colours     | Treemap - static and in animation               | {BobRossColors} package    |
-| [10](20230307wk10) | Numbats in Oz        | Geospatial map; tile plots                      | {Atlas of Living Australia}|
+| [10](20230307wk10) | Numbats in Oz <:3)~  | Geospatial map; tile plots                      | {Atlas of Living Australia}|
 
 
 ## :chart_with_upwards_trend: &nbsp; Visualisations 
