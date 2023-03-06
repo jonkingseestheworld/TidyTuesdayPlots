@@ -14,8 +14,9 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 Numbat is regarded as an endangered species in Oz. The data here shows the sightings of the animal since 2010. Over years numbats are spotten more often in the warmer months in Australia.
 ![Screenshot](2023/20230307wk10/tt20230307wk10_numbats.png)
 
+
 ### **["The Joy of Painting": Colours used in Bob Ross' paintings](2023/20230221wk8/)**
-**Different colours used over the seasons of the show in animation**
+**Different colours used over the seasons of the show in animation**    
 ![Screenshot](2023/20230221wk8/tt20230221wk8_BRcolor_anim.gif)
 
 **All unique colours used across all 31 seasons of the show**
