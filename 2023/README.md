@@ -1,12 +1,12 @@
 # TidyTuesday 2023
 
 ## :spiral_notepad:	&nbsp; Summary 
-| Week               | Topic                | Graphic / Visual                                | Source                  |
-|:------------------:|----------------------|-------------------------------------------------|-------------------------|
-| [6](20230207wk6)   | Big Tech Stock       | Multiple line plots of time series data         | Yahoo Finance           |
-| [7](20230214wk7)   | Hollywood Age Gap    | Interactive {reactable} along with html tweaks  | Data is Plural          |
-| [8](20230221wk8)   | Bob Ross Colours     | Treemap - static and in animation               | {BobRossColors} package |
-
+| Week               | Topic                | Graphic / Visual                                | Source                     |
+|:------------------:|----------------------|-------------------------------------------------|----------------------------|
+| [6](20230207wk6)   | Big Tech Stock       | Multiple line plots of time series data         | Yahoo Finance              |
+| [7](20230214wk7)   | Hollywood Age Gap    | Interactive {reactable} along with html tweaks  | Data is Plural             |
+| [8](20230221wk8)   | Bob Ross Colours     | Treemap - static and in animation               | {BobRossColors} package    |
+| [10](20230307wk10) | Numbats in Oz        | Geospatial map; tile plots                      | {Atlas of Living Australia}|
 
 
 ## :chart_with_upwards_trend: &nbsp; Visualisations 
@@ -21,7 +21,11 @@ Table graphic summarising analysis of the age difference between the opposite se
 ![Screenshot](20230214wk7/tt20230214wk7_hollywoodAge.png)
 
 
-
 ### **[Wk8 - The Joy of Painting: Bob Ross's Use of Colours](20230221wk8)**
 Treemap illustration showing all the unique colours (and their relative proportions) used by Bob Ross in the paintings made in all the seasons of the show 'The Joy of Painting'
 ![Screenshot](20230221wk8/tt20230221wk8_BRcolor_uniq.png)
+
+
+### **[Wk10 - Numbat sightings in Oz](20230307wk10)**
+Numbat is regarded as an endangered species in Oz. The data here shows the sightings of the animal since 2010. Over years numbats are spotten more often in the warmer months in Australia.
+![Screenshot](20230307wk10/tt20230307wk10_numbats.png)
