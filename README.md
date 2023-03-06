@@ -10,7 +10,7 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 
 ## Gallery of Examples
 
-### **[Numbat sightings in Oz](2023/20230307wk10)**
+### **[Numbat sightings in Oz](2023/20230307wk10)** :rat:
 Numbat is regarded as an endangered species in Oz. The data here shows the sightings of the animal since 2010. Over years numbats are spotten more often in the warmer months in Australia.
 ![Screenshot](2023/20230307wk10/tt20230307wk10_numbats.png)
 
