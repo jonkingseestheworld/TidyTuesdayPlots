@@ -64,7 +64,6 @@ unique_color_hex_list <- unique_color_hex_list %>%
                             color_hex %in% white ~ "white",
                             color_hex %in% brownred ~ "brownred",
                             color_hex %in% greenblue ~ "greenblue",
-                            #color_hex %in% greenblue ~ "greenblue",
                             color_hex %in% yellow ~ "yellow",) )
 
 
@@ -76,7 +75,6 @@ col_pal <- c("Black Gesso" = "#000000", "Liquid Black" = "#000000", "Midnight Bl
              "Phthalo Green"="#102E3C", "Sap Green"= "#0A3410", "Prussian Blue"="#021E44", "Phthalo Blue" = "#0C0040",
              "Cadmium Yellow"="#FFEC00", "Indian Yellow" = "#FFB800", "Yellow Ochre"="#C79B00"
 )
-
 
 
 

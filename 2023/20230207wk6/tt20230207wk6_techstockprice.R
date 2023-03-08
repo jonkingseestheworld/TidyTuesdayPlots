@@ -1,27 +1,29 @@
+
+#wk 6: 2023-02-07
+#author: Johnny K Lau
+
+# for data wrangling
 library(tidyverse)
 library(showtext)
 library(janitor)
+
+# for plotting
 library(ggtext)
 library(ggimage)
 library(glue)
+
+library(showtext)
+
+# Add custom font
+font_add_google(name = "Inter", family = "inter")
+showtext_auto()
+
 
 # Load data
 big_tech_stock_prices <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-02-07/big_tech_stock_prices.csv')
 big_tech_companies <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-02-07/big_tech_companies.csv')
 
 
-# Add custom font
-font_add_google(name = "Inter", family = "inter")
-showtext_auto()
-
-# Add color palette
-#pal <- c(AAPL = "#a2aaad", ADBE = "#ff0000", AMZN = "#ff9900", CRM = "#009edb", CSCO = "#1798c1", GOOGL = "#34a853", IBM = "#1fc0c1",
-#         INTC = "#127cc1", META = "#0668e1", MSFT = "#f34f1c", NFLX = "#d81f26", NVDA = "#76b900", ORCL = "#c74634", TSLA = "#e31937")
-
-pal <- c(AAPL = "#a2aaad", ADBE = "#ff0000", AMZN = "#FFA500", CRM = "#009edb", 
-         CSCO = "#1fc0c1", GOOGL = "#f34f1c", IBM = "#0668e1",
-         INTC = "#127cc1", META = "#1798c1", MSFT = "#34a853", NFLX = "#000000", 
-         NVDA = "#76b900", ORCL = "#a45729", TSLA = "#e31937")
 
 
 # Clean company data
@@ -37,8 +39,8 @@ companies_logos_df <- big_tech_stock_prices %>%
     max_close = max(close)
   ) %>%
   distinct(stock_symbol, first_date, max_close) %>%
+  ## add logo img dir for each big tech to a col in the dataframe
   mutate( logo_path = paste0(here::here(), "/2023/20230207wk6/logos/", stock_symbol, ".png") )
-
 
 
 # Join datasets 
@@ -46,6 +48,12 @@ df_joined <- big_tech_stock_prices %>%
   left_join( big_tech_companies, by="stock_symbol") %>%
   select(-stock_symbol)
 
+
+# Add color palette
+pal <- c(AAPL = "#a2aaad", ADBE = "#ff0000", AMZN = "#FFA500", CRM = "#009edb", 
+         CSCO = "#1fc0c1", GOOGL = "#f34f1c", IBM = "#0668e1",
+         INTC = "#127cc1", META = "#1798c1", MSFT = "#34a853", NFLX = "#000000", 
+         NVDA = "#76b900", ORCL = "#a45729", TSLA = "#e31937")
 
 
 # Create visualization
@@ -69,7 +77,7 @@ stockprice_plot <- ggplot(data= df_joined) +
   scale_color_manual(values = pal) +
   scale_fill_manual(values = pal) +
   theme_void() +
-  
+  ## add titles & caption, and adjust other plot aesthetics
   labs( title = "Big Tech Stock Prices",
         subtitle = "Stock price fluctuation of 14 big tech companies between 2010 and 2022 
         <br>Price at market close, showing only business days",
@@ -87,4 +95,4 @@ stockprice_plot <- ggplot(data= df_joined) +
         legend.position = "none")
 
 # Save plot
-ggsave("2023/20230207wk6/20230207wk6_techstockprice.png", stockprice_plot, width = 12, height = 12)
+ggsave("2023/20230207wk6/tt20230207wk6_techstockprice.png", stockprice_plot, width = 12, height = 12)
