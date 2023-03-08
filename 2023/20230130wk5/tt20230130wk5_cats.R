@@ -1,15 +1,18 @@
+#wk 5: 2023-01-30
+#author: Johnny K Lau
 
+# for data wrangling
 library(dplyr)
 library(tidyr)
+library(glue)
+
+# for plotting
 library(ggplot2)
 library(ggmap)
-#library(grid)
-#library(gridExtra)
 library(patchwork)
 library(ggtext)
 
 library(showtext)
-library(glue)
 
 font_add_google(name = "Itim", family = "Itim")
 font_add_google(name = "Roboto Condensed", family = "RobCon")
@@ -18,7 +21,7 @@ showtext_auto()
 
 
 
-# import data directly from github ---
+# import data
 cats_uk_mvmt <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-01-31/cats_uk.csv')
 cats_uk_reference <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-01-31/cats_uk_reference.csv')
 
@@ -57,7 +60,7 @@ cats_prey_age_outdoors_plot <- cats_uk_reference %>%
          axis.line.x = element_line(arrow = grid::arrow(length = unit(0.15, "cm")), colour="white" ),
          plot.margin = unit(c(t=0, r=0.75, b=0.5, l=0), "cm") )
 
-### add arrows + customised texts for specific cats
+### add arrows + customised texts for the selected cats
 Jago_pers_data <- cats_uk_reference %>%
   filter( animal_id == "Jago") %>%
   select(animal_id, hrs_indoors, prey_p_month, age_years)
@@ -130,11 +133,6 @@ cats_prey_age_indoors_plot <- cats_uk_reference %>%
          plot.background=element_rect(fill = "black", colour="#808080", linetype="dotted", size=1 ),
          plot.title = element_text(hjust = 0.1, vjust= -0.5, family = "RobCon", size=28, colour="#808080"),
          plot.margin = unit(c(t=0, r=0.75, b=0, l=0), "cm"))
-
-
-
-# (cats_prey_age_outdoors_plot)/(cats_prey_age_indoors_plot)
-
 
 
 

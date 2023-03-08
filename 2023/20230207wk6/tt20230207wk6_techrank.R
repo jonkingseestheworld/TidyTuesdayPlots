@@ -1,24 +1,36 @@
-library(ggbump)
+#wk 6: 2023-02-07
+#author: Johnny K Lau
+
+# for data wrangling
 library(tidyverse)
+
+# for plotting
+library(ggbump)
 library(cowplot)
 library(wesanderson)
 library(ggtext)
+
 library(showtext)
 
 # Add custom font
 font_add_google(name = "Inter", family = "inter")
 showtext_auto()
 
+
 ## Load data
 big_tech_stock_prices <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-02-07/big_tech_stock_prices.csv')
 big_tech_companies <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-02-07/big_tech_companies.csv')
 
 
+
+## get the last closing value at year end for each year (i.e. max(date) )
+## keep record until 2022 only
 df_stock_year_end <- big_tech_stock_prices %>%
   mutate(year = lubridate::year(date)) %>%
   group_by(stock_symbol, year) %>%
   filter( date == max(date) ) %>%
   select( stock_symbol, year, close ) %>%
+  ## rank the tech companies by their closing value in descending order
   group_by(year) %>%
   mutate( rank = rank( -close, ties.method="min")) %>%
   ungroup() %>%
@@ -26,11 +38,15 @@ df_stock_year_end <- big_tech_stock_prices %>%
   filter( year <= 2022) 
 
 
+# Add color palette
 pal <- c(AAPL = "#a2aaad", ADBE = "#ff0000", AMZN = "#FFA500", CRM = "#009edb", 
          CSCO = "#1fc0c1", GOOGL = "#f34f1c", IBM = "#0668e1",
          INTC = "#127cc1", META = "#1798c1", MSFT = "#34a853", NFLX = "#000000", 
          NVDA = "#76b900", ORCL = "#a45729", TSLA = "#e31937")
 
+
+# identify companies that are on top 3 ranks in year 2010 or year 2022
+# only assign specific colours to those companies and then use the same colour tone for all the other companies
 df_pal <- data.frame(pal) %>%
   mutate(stock_symbol = row.names(.)) %>%
   left_join( df_stock_year_end %>%  filter( year==2010 & rank<=3 | year == 2022 & rank <=3) %>% 
@@ -40,21 +56,22 @@ df_pal <- data.frame(pal) %>%
   mutate( pal = ifelse(!is.na(rankFirst3), pal, "#a2aaad") ) %>%
   select(-rankFirst3)
 
+# joining database
 df_stock_year_end <- df_stock_year_end %>%
   left_join(df_pal, by="stock_symbol")
 
 
-# Get company max closing value and min date
+# Add logo directories to the company rank list for the first year of the plot (i.e. 2010)
 start_df_logo <- df_stock_year_end %>%
-  filter( year == 2010 ) %>%    #| year==2022
+  filter( year == 2010 ) %>%    
   select(stock_symbol, year, rank) %>%
   mutate( logo_path = paste0(here::here(), "/2023/20230207wk6/logos/", stock_symbol, ".png") )
 
+# Add logo directories to the company rank list for the last year of the plot (i.e. 2022)
 end_df_logo <- df_stock_year_end %>%
-  filter( year == 2022) %>%    #| year==2022
+  filter( year == 2022) %>%   
   select(stock_symbol, year, rank) %>%
   mutate( logo_path = paste0(here::here(), "/2023/20230207wk6/logos/", stock_symbol, ".png") )
-
 
 
 
@@ -85,6 +102,7 @@ big_tech_stock_rank_plot <- ggplot(df_stock_year_end, aes(year, rank, color = st
        x = NULL) +
   scale_y_reverse(breaks = seq(1, 14, 1)) +
   scale_color_manual(values = df_pal$pal) +
+  ## add titles and adjust plot aesthetics
   labs( title = "Big Tech Ranking By Stock Price Over Years",
         subtitle = "Rank movement of 14 big tech companies by year-end closing stock price between 2010 and 2022.
         <br>Most companies had experienced a roller-coster ride. In 2010, the top 3 were IBM, SalesForce and Oracle; 
@@ -104,6 +122,7 @@ big_tech_stock_rank_plot <- ggplot(df_stock_year_end, aes(year, rank, color = st
         plot.background = element_rect(fill = "#e5fbe5"),
         plot.margin = margin(20, 20, 20, 30) ) 
 
-ggsave("/2023/20230207wk6/20230207wk6_techrank.png", big_tech_stock_rank_plot, width = 10, height = 9)
+
+ggsave("/2023/20230207wk6/tt20230207wk6_techrank.png", big_tech_stock_rank_plot, width = 10, height = 9)
 
 
