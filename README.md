@@ -10,6 +10,10 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 
 ## Gallery of Examples
 
+### **[Trivia about Time 2023](2023/20230328wk13)** 
+Which places still observe Daylight Saving time in 2023? Most European countries and states in English-speaking countries in North America and Oceania do. 
+![Screenshot](2023/20230328wk13/tt20230329wk13_timezones.png)
+
 ### **[Numbat sightings in Oz](2023/20230307wk10)** :rat:
 Numbat is regarded as an endangered species in Oz. The data here shows the sightings of the animal since 2010. Over years numbats are spotten more often in the warmer months in Australia.
 ![Screenshot](2023/20230307wk10/tt20230307wk10_numbats.png)
