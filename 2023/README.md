@@ -7,6 +7,7 @@
 | [7](20230214wk7)   | Hollywood Age Gap    | Interactive {reactable} along with html tweaks  | Data is Plural             |
 | [8](20230221wk8)   | Bob Ross Colours     | Treemap - static and in animation               | {BobRossColors} package    |
 | [10](20230307wk10) | Numbats in Oz 🐀     | Geospatial map; tile plots                      | {Atlas of Living Australia}|
+| [13](20230328wk13) | Timezones in 2023    | Geospatial map; ggtext                          | IANA tz database           |
 
 
 ## :chart_with_upwards_trend: &nbsp; Visualisations 
@@ -29,3 +30,7 @@ Treemap illustration showing all the unique colours (and their relative proporti
 ### **[Wk10 - Numbat sightings in Oz](20230307wk10)**
 Numbat is regarded as an endangered species in Oz. The data here shows the sightings of the animal since 2010. Over years numbats are spotten more often in the warmer months in Australia.
 ![Screenshot](20230307wk10/tt20230307wk10_numbats.png)
+
+### **[Wk13 - Trivia about Time 2023](20230328wk13)** :clock1:
+Which places still observe Daylight Saving time in 2023? Most European countries and states in English-speaking countries in North America and Oceania do. 
+![Screenshot](20230328wk13/tt20230329wk13_timezones.png)
