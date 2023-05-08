@@ -8,6 +8,7 @@
 | [8](20230221wk8)   | Bob Ross Colours     | Treemap - static and in animation               | {BobRossColors} package    |
 | [10](20230307wk10) | Numbats in Oz 🐀     | Geospatial map; tile plots                      | {Atlas of Living Australia}|
 | [13](20230328wk13) | Timezones in 2023    | Geospatial map; ggtext                          | IANA tz database           |
+| [17](20230425wk17) | London Marathon      | Polar barplot; ggflags                          | {LondonMarathon} by NRennie           |
 
 
 ## :chart_with_upwards_trend: &nbsp; Visualisations 
@@ -34,3 +35,8 @@ Numbat is regarded as an endangered species in Oz. The data here shows the sight
 ### **[Wk13 - Trivia about Time 2023](20230328wk13)** :clock1:
 Which places still observe Daylight Saving time in 2023? Most European countries and states in English-speaking countries in North America and Oceania do. 
 ![Screenshot](20230328wk13/tt20230329wk13_timezones.png)
+
+
+### **[Wk17 - London Marathon Winners](20230425wk17)** :running_woman: :running_man:
+Countries including Kenya and the UK have the most winners in the past London Marathon events across multiple categories.
+![Screenshot](20230425wk17/tt20230425wk17_marathon.png)

@@ -10,6 +10,12 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 
 ## Gallery of Examples
 
+
+### **[London Marathon Winners](2023/20230425wk17)** :running_woman: :running_man:
+Countries including Kenya and the UK have the most winners in the past London Marathon events across multiple categories.
+![Screenshot](2023/20230425wk17/tt20230425wk17_marathon.png)
+
+
 ### **[Trivia about Time 2023](2023/20230328wk13)** :clock1:
 Which places still observe Daylight Saving time in 2023? Most European countries and states in English-speaking countries in North America and Oceania do. 
 ![Screenshot](2023/20230328wk13/tt20230329wk13_timezones.png)
