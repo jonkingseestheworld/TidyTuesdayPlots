@@ -15,7 +15,7 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 Countries including Kenya and the UK have the most winners in the past London Marathon events across multiple categories.
 ![Screenshot](2023/20230425wk17/tt20230425wk17_marathon.png)
 
-### **[US Map of Historical Plaques on Freedom](2023/20230704wk27)** 
+### **[US Map of Historical Plaques on Freedom](2023/20230704wk27)** :rock:	:wood:	
 Public history cast in metal, carved on stone, or embedded in resin. On record most historical plaques have been put on the east coast states especially those related to freedom and civil rights.
 ![Screenshot](2023/20230704wk27/tt20230704wk27_hist_markers.png)
 
