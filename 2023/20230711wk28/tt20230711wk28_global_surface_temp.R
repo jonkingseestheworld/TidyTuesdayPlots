@@ -61,7 +61,7 @@ global_rolling <- global_trend |>
 DATASET <- "**Data**: GISS Surface Temperature Analysis"
 space <- paste0("<span style='color:", BG_COLOR, "'>--</span>")
 
-plot_caption <- paste0("**#TidyTuesday** 2023 Wk 28", space, "|", space, DATASET, space, "|", space, "**Plot**: Johnny King L", space, "@jonkingseestheworld (Github)")
+plot_caption <- paste0("**#TidyTuesday** 2023 Wk 28", space, "|", space, DATASET, space, "|", space, "**Plot**: Johnny K Lau", space, "@jonkingseestheworld (Github)")
 
 title_txt = "RISING GLOBAL TEMPERATURE"
 subtitle_txt = "The NASA GISS Surface Tempearture Analysis estimates global surface temperature change.<br>
@@ -129,7 +129,7 @@ anim_global_plot <- global_trend |>
 
 animate(anim_global_plot,  height = 900, width =1200) 
 
-global_filename = "exploration/20230711wk28/tt20230711wk28_global_temp.gif"
+global_filename = "2023/20230711wk28/tt20230711wk28_global_temp.gif"
 anim_save(global_filename, animation = last_animation() )
       
       
@@ -192,7 +192,7 @@ anim_NH_plot <- df_NHSH |>
 
 animate(anim_NH_plot, height = 800, width =1000)
 
-NH_filename = "exploration/20230711wk28/tt20230711wk28_NorthernHemi_temp.gif"
+NH_filename = "2023/20230711wk28/tt20230711wk28_NorthernHemi_temp.gif"
 anim_save(NH_filename, animation = last_animation() )
 
 
@@ -227,6 +227,6 @@ anim_SH_plot <- df_NHSH |>
 
 animate(anim_SH_plot, height = 800, width =1000)
 
-SH_filename = "exploration/20230711wk28/tt20230711wk28_SouthernHemi_temp.gif"
+SH_filename = "2023/20230711wk28/tt20230711wk28_SouthernHemi_temp.gif"
 anim_save(SH_filename, animation = last_animation() )
 
