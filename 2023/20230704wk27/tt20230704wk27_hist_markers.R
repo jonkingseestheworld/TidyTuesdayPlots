@@ -82,7 +82,7 @@ mapPlot <- ggplot() +
   ## add titles
   labs(title ="Public History Cast in Metal, \nCarved on Stone, or Embedded in Resin",
         subtitle = "Map of <span style='color:#097969'>historical plaques</span> in the United States
-                    \nOn record most plaques have been put up on the east coast especially <span style='color:#dc8012'>those pertinent to freedom and civil rights</span>"
+                    \nOn record most plaques have been put up in east coast towns especially <span style='color:#dc8012'>those pertinent to freedom and (civil) rights</span>"
           ) +
   ## adjust plot aesthetics
   theme( plot.background = element_rect(fill = bg_color, color = bg_color),
