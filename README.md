@@ -13,6 +13,8 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 ### **[Rising Global Temperature](2023/20230711wk28)** :chart_with_upwards_trend:
 ![Screenshot](2023/20230711wk28/tt20230711wk28_global_temp.gif)
 
+![Screenshot](2023/20230711wk28/tt20230711wk28_NorthernHemi_temp.gif)
+
 ### **[London Marathon Winners](2023/20230425wk17)** :running_woman: :running_man:
 Countries including Kenya and the UK have the most winners in the past London Marathon events across multiple categories.
 ![Screenshot](2023/20230425wk17/tt20230425wk17_marathon.png)
