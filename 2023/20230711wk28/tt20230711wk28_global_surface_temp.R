@@ -33,10 +33,6 @@ AXIS_TEXT_SIZE <- 15
           
 
 
-#font_add_google("Barlow", "bar")
-
-
-
 # GLOBAL Trend ##
 # 🤼 Wrangle -----------------------------------------------------------------
 global_trend <- global_temps |>
