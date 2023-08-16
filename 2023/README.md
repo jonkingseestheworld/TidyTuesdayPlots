@@ -10,7 +10,7 @@
 | [13](20230328wk13) | Timezones in 2023    | Geospatial map; ggtext                          | IANA tz database           |
 | [17](20230425wk17) | London Marathon      | Polar barplot; ggflags                         | {LondonMarathon} by NRennie |
 | [27](20230704wk27) | Historical Markers in USA | Geospatial map; ggrepel                    | Historical Marker Database |
-
+| [28](20230711wk28) | Rising Global Temperature | gganimate                    | GISS Surface Tempearture Analysis |
 
 ## :chart_with_upwards_trend: &nbsp; Visualisations 
 
