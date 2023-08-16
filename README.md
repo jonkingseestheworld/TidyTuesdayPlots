@@ -11,6 +11,8 @@ Taken from [R For Data Science](https://github.com/rfordatascience/tidytuesday) 
 ## Gallery of Examples
 
 ### **[Rising Global Temperature](2023/20230711wk28)** :chart_with_upwards_trend:
+The NASA GISS Surface Tempearture Analysis estimates global surface temperature change. The estimates combine land-surface, air and sea-surface water temperature anomalies (Land-Ocean Temperature Index, L-OTI). 
+Since early 1980s, the average annual temperature has increased continually.
 ![Screenshot](2023/20230711wk28/tt20230711wk28_global_temp.gif)
 
 ![Screenshot](2023/20230711wk28/tt20230711wk28_NorthernHemi_temp.gif)
