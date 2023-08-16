@@ -4,19 +4,17 @@
 
 
 library(tidyverse)
-
-#library(lubridate)
 library(zoo)
 
 library(glue)
 library(ggplot2)
 library(ggtext)
+library(gganimate)
+
+#library(lubridate)
 #library(janitor)
 #library(patchwork)
 #library(showtext)
-
-library(gganimate)
-
 
 
 # 💾 Load data ---------------------------------------------------------------
