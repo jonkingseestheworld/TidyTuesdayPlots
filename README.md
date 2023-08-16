@@ -15,7 +15,7 @@ The NASA GISS Surface Tempearture Analysis estimates global surface temperature 
 Since early 1980s, the average annual temperature has increased continually.
 ![Screenshot](2023/20230711wk28/tt20230711wk28_global_temp.gif)
 
-Recreation with animation of the iconic 'warming stripes' visualisation by climatologist Ed Hawkins
+Also, rRecreation with animation of the iconic 'warming stripes' visualisation by climatologist Ed Hawkins
 ![Screenshot](2023/20230711wk28/tt20230711wk28_NorthernHemi_temp.gif)
 
 ### **[London Marathon Winners](2023/20230425wk17)** :running_woman: :running_man:
